@@ -1,0 +1,6 @@
+1. Instalación de docker en windows
+https://docs.docker.com/desktop/install/windows-install/
+    a. 
+
+2. Instalacion de eclipse mosquitto image
+https://hub.docker.com/_/eclipse-mosquitto
