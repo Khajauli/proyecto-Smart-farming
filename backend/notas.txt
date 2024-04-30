@@ -1,9 +1,5 @@
-1. Instalación de docker en windows
-https://docs.docker.com/desktop/install/windows-install/
-    a. sudo apt install docket.io docker-compose -y
-    b. crear un volumen de docker en el directorio local mkdir mosquitto
-    c. instalar mosquitto en docker
+Creacion del servidor mosquitto
+1. Instalación de docker en mac
 
 
-2. Instalacion de eclipse mosquitto image
-https://hub.docker.com/_/eclipse-mosquitto
+
