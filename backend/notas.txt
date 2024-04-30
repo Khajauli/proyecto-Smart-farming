@@ -1,13 +1,30 @@
 Creacion del servidor mosquitto
 1. Instalación de docker en mac
 a. https://gist.github.com/FranklinYu/5e0bb9d6c0d873f33c78415dd2ea4138
+
 2. instalacion de servidor mqtt en visual studio code
 a. crear archivo dockerfile llamado "Dockerfile"
 b. cargar la imagen de docker "docker build -t my-mosquitto-image .
 "
 c. Correr el contenedor de mosquitto "docker run -d --name my-mosquitto-container -p 1883:1883 my-mosquitto-image"
+d. para comprobar que docker esta corriendo "docker ps"
+
 3. probar el broker de mosquitto creado
 a. instalar las herramientas de publicador i suscriptor en mosquitto "brew install mosquitto"
 b. para empezar mosquitto "brew services start mosquitto"
 
+4. publicar y recibir un mensaje
+a. para poder suscribirse a un tema 
+    "mosquitto_sub -h localhost -t "your-topic""
+b. para poder publicar un mensaje dentro de un tema especifico 
+    "mosquitto_pub -h localhost -t "your-topic" -m "Hello, MQTT\!""
+
+La comunicacion de prueba sirve
+
+LA ARQUITCTURA REQUIERE OTROS DOS CONTENEDORES, EL DE BACKEND EN NODEJS Y UNO DE BASE DE DATOS EN MONGO Dockerfile
+PARA LO CUAL:
+
+5.Crear una red de docker, dentro de la carpeta donde esta el dockerfile, es decir la carpeta contenedores
+    "docker network create farming_network"
+6. 
 
