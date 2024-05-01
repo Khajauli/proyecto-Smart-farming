@@ -1,18 +1,22 @@
-const mqtt = require ('mqtt');
+const mqtt = require('mqtt');
 const client = mqtt.connect('mqtt://mqtt_broker:1883');
 
-//funcion para conectar y suscribirse al tema
-client.on('connect', function(){
-    console.log('Conectado al broker de MQTT ');
-
-    //suscribirse a los temas de mqtt
-    client.subscribe('your-topic');
-
+client.on('connect', function () {
+    console.log('Connected to MQTT broker');
+    client.subscribe('your-topic', function (err) {
+        if (err) {
+            console.error('Subscription error:', err);
+        } else {
+            console.log('Subscribed to topic: your-topic');
+        }
+    });
 });
 
-//funcion para manejar los mensajes de MQTT
-client.on('message', function(topic,message){
-    console.log('Mensaje recibido:', message.toString());
-
+client.on('message', function (topic, message) {
+    console.log(`Received message on topic ${topic}: ${message.toString()}`);
+    // Process incoming MQTT messages here
 });
 
+client.on('error', function (err) {
+    console.error('MQTT client error:', err);
+});
