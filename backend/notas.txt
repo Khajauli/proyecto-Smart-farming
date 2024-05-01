@@ -7,6 +7,11 @@ a. crear archivo dockerfile llamado "Dockerfile"
 b. cargar la imagen de docker "docker build -t my-mosquitto-image .
 "
 c. Correr el contenedor de mosquitto "docker run -d --name my-mosquitto-container -p 1883:1883 my-mosquitto-image"
+
+
+    docker run -d --name mqtt_broker --network farming_network my-mosquitto-image
+
+
 d. para comprobar que docker esta corriendo "docker ps"
 
 3. probar el broker de mosquitto creado
@@ -33,4 +38,11 @@ b. instalar nodejs version 14.x
 c. inicializar nodejs "npm init -y"
 d. instalar las dependencias de nodejs y mqtt
     "npm install mqtt"
+e. escribir el codigo de conexion de la aplicacion con nodejs en app.js
+f. crear el dockerfile (en esta version esta solo conectado al contenedor mqtt)
+g. construir la imagen y correr el contenedor de nodejs
+    "docker build -t imagen_nodejs ."
+h. correr el contenedor de nodejs
+    docker run -d --name node_app --network farming_network imagen_nodejs
+
 
