@@ -26,5 +26,11 @@ PARA LO CUAL:
 
 5.Crear una red de docker, dentro de la carpeta donde esta el dockerfile, es decir la carpeta contenedores
     "docker network create farming_network"
-6. 
+
+6. Creacion del contenedor NODEJS 
+a. crear un nuevo directorio para el contenedor de BACKEND
+b. instalar nodejs version 14.x
+c. inicializar nodejs "npm init -y"
+d. instalar las dependencias de nodejs y mqtt
+    "npm install mqtt"
 
