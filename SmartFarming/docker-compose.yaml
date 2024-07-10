@@ -1,0 +1,47 @@
+version: '3'
+services:
+  mqtt: 
+    container_name: mqtt
+    image: eclipse-mosquitto:1.6.15-openssl
+    restart: always
+    volumes:
+      - /Users/administrador/Documents/proyecto-Smart-farming/SmartFarming/mosquitto/config:/mosquitto/config
+      - /Users/administrador/Documents/proyecto-Smart-farming/SmartFarming/mosquitto/data:/mosquitto/data
+      - /Users/administrador/Documents/proyecto-Smart-farming/SmartFarming/mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+      - 9001:9001
+    networks:
+      - mqtt_net
+
+
+  nodejs:
+    container_name: nodejs_app
+    build: ./nodejs-app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mqtt
+    networks:
+      - mqtt_net
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:4.4.11
+    restart: always
+    volumes:
+      - ./mongodb_data:/data/db  
+    networks:
+      - mqtt_net
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  mqtt_net:
+    driver: bridge
+
+      

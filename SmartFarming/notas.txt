@@ -1,0 +1,108 @@
+1. crear el archivo de docker compose y correr
+    docker compose up
+2. para que agarre las actualizaciones 
+    docker compose down
+    docker compose up -d
+3. publicar y recibir un mensaje
+a. para poder suscribirse a un tema 
+    "mosquitto_sub -h localhost -t "humedadH""
+b. para poder publicar un mensaje dentro de un tema especifico 
+    "mosquitto_pub -h localhost -t "humedadH" -m "Hello, MQTT\!""
+
+4. Creacion de contenedor de nodejs
+a. agregar appjs. creacion de dockerfile e instalacion de dependencias para mqtt en carpeta
+
+5. Creacion de contenedor e nodejs 
+a. Agregar  las configuraciones en docker-compose
+b. instalar mongoose en la aplicacion de nodejs
+    npm install mongoose
+  5.1 Creacion de la base de datos local
+  instalacion de mongo db
+  para correr la base de datos  brew services start mongodb/brew/mongodb-community@4.4
+  sacar del zip la carpeta y pasarla al directorio principal, agregar el path de comandos en el archivo
+  Para que pueda servir correr:
+  brew install mongodb-community-shell 
+
+c.iniciar el servidor de mongodb
+    mongo
+
+d. install mongoose para nodejs
+    npm install mongoose
+
+
+e. en mongodb shell correr el comando para poder crear la base de datos
+    use baseParametros
+
+f. Cambiar el codigo en app.js
+
+  5. Comandos para ver los procesos 
+    sudo lsof -i :numero_puerto
+    kill <idproceso>
+
+6. Probar que mongodb funciona
+Para poder en trar en la consola del contenedor
+docker exec -it mongodb mongo
+
+    para poder ver lo que esta en la base de datos
+
+    // Switch to your database
+    use baseParametros
+
+    // Show collections
+    show collections
+
+    // Find documents in the messages collection
+    db.messages.find()
+
+    Para cerrar 
+        exit
+    para eliminar datos de una coleccion
+    db.messages.drop()
+6. instalar express dentro de la carpeta donde esta el app.js
+    npm install express
+
+    para poder entrar al cmd de mongodb
+    docker exec -it nodejs_app /bin/bash
+
+    a. agregar funciones para poder acceder a la data en app.js
+    b. probar que pueda extraerse datos de backend con curl
+    Por fecha
+        curl http://localhost:3000/api/mensajes/fecha/2024-06-24
+    por intervalo de hora
+        curl http://localhost:3000/api/mensajes/intervalo/2024-05-20T12:00:00Z
+    c. hacer funciones por tipo de tema
+    HONGOS
+    curl http://localhost:3000/api/mensajes/hongos/2024-06-24
+    TOMATES WIFI
+    curl http://localhost:3000/api/mensajes/tomateswifi/2024-06-24
+    TOMATES LORA
+    curl http://localhost:3000/api/mensajes/tomateslora/2024-06-24
+
+
+    
+
+7. para que la computadora corra permanentemente
+    Preferencias del Sistema:
+
+    Ve a Preferencias del Sistema > Economizador.
+    Configura Apagar la pantalla después de: a Nunca y desmarca Poner los discos duros en reposo cuando sea posible.
+    Usar caffeinate en la Terminal:
+
+    Abre la aplicación Terminal.
+    Ejecuta el comando caffeinate para evitar que tu Mac entre en reposo mientras se esté ejecutando.
+    para salir se debe usar Ctrl+C
+
+8. Pruebas de mqtt
+ a. se hace un script para que tome el estado de la computadora en diferentes momentos
+ b. se hace un script para que se hagan suscripciones cada minuto incrementando de 10en 10
+     a breves rasgos  en la iteracion 480 es decir a los 48 minutos la conexion se pierde ya que el puerto mqtt solo puede
+     soportar 480 noexiones en este computador
+    
+9. Dividir en diferentes archivos el codigo para sea mas entendible
+
+10. agregar las apis para que se pueda hacer crud con la nueva base devices
+
+11. cambiar mqtt para que se suscriba a todos los temas que estan en esa base
+12 re estructurar la forma en la que se estructura la base  de datos para que pueda ser escalable con mas dispositivos.
+
+
